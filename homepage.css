@@ -1,0 +1,220 @@
+@import url("https://fonts.googleapis.com/css?family=Holtwood+One+SC|Source+Code+Pro|Abel");
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Abel", Courier, monospace;
+    text-transform: uppercase;
+    color: #fa4b23;
+    background: #111;
+    overflow: hidden;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    text-align: center;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-family: "Holtwood One SC", Arial, sans-serif;
+    font-size: 5em;
+    line-height: 1em;
+}
+
+.community {
+    white-space: nowrap;
+}
+
+h3 {
+    font-family: "Source Code Pro", Courier, monospace;
+    font-size: 2em;
+}
+
+.line {
+    display: block;
+    overflow-y: hidden;
+    height: 90px;
+    color: #fff;
+}
+
+.line.bottom {
+    line-height: 1.7em;
+    border-bottom: 3px solid white;
+}
+
+.line.top {
+    line-height: .5em;
+    border-top: 3px solid white;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.slogan {
+    font-size: 3em;
+    font-family: "Abel", Arial, sans-serif;
+}
+
+.slogan .fa {
+    padding: 0 .5em;
+    font-size: .75em;
+}
+
+.glitch {
+    animation: glitch 1s infinite linear;
+    animation-delay: 5s;
+}
+
+.social-buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    padding-top: 3em;
+}
+
+.social-buttons .icon-wrap {
+    padding: 0 1em;
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fa4b23;
+}
+
+/* OWL MASCOT */
+
+.owl {
+    font-family: "Source Code Pro", Courier, monospace;
+    font-size: 3em;
+    color: #444;
+}
+
+.owl span {
+	display: inline-block;
+	transform: rotate(0deg) translateX(0) translateY(0) scale(1);
+    animation-delay: 5s;
+}
+
+.head { animation: 5s infinite rotate ease-in-out; }
+.brows { animation: 5s infinite downup ease-in-out; }
+.eye-left { animation: 5s infinite blink1 ease-in-out; }
+.eye-right { animation: 5s infinite blink2 ease-in-out; }
+.brow-left { animation: 5s infinite rotate-evil1 ease-in-out; }
+.brow-right { animation: 5s infinite rotate-evil2 ease-in-out; }
+.wing-left { animation: 5s infinite leftright ease-in-out; }
+.wing-right { animation: 5s infinite leftright ease-in-out; }
+.belly { animation: 5s infinite leftright2 ease-in-out; }
+.back { animation: 5s infinite leftright2 ease-in-out; }
+.foot-right { animation: 7s infinite updown ease-in-out; }
+.stick { animation: 5s infinite rightleft ease-in-out; }
+
+/* OWL MASCOT ANIMATION */
+
+@keyframes updown {	
+	10% { transform: translateY(-5px); }
+	50% { transform: translateY(-5px); }
+	70% { transform: translateY(0); }
+}
+
+@keyframes downup {	
+	10% { transform: translateY(10px); }
+	50% { transform: translateY(10px); }
+	70% { transform: translateY(0); }
+}
+
+@keyframes rotate {	
+	10% { transform: rotate(10deg); }
+	50% { transform: rotate(10deg); }
+	70% { transform: rotate(0deg);	}
+}
+
+@keyframes rotate-evil1 {	
+	10% { transform: rotate(25deg); }
+	50% { transform: rotate(25deg); }
+	70% { transform: rotate(0deg);	}
+}
+
+@keyframes rotate-evil2 {	
+	10% { transform: rotate(-35deg); }
+	50% { transform: rotate(-35deg); }
+	70% { transform: rotate(0deg);	}
+}
+
+@keyframes leftright {	
+	10% { transform: translateX(-10px); }
+	50% { transform: translateX(-10px); }
+	70% { transform: translateX(0); }
+}
+
+@keyframes leftright2 {	
+	10% { transform: translateX(-5px); }
+	50% { transform: translateX(-5px); }
+	70% { transform: translateX(0); }
+}
+
+@keyframes rightleft {	
+	10% { transform: translateX(2px); }
+	50% { transform: translateX(2px); }
+	70% { transform: translateX(0); }
+}
+
+@keyframes blink1 {
+	10% { transform: scale(1.2); }
+	50% { transform: scale(1.2); }
+	70% { transform: scale(1); }
+}
+
+@keyframes blink2 {
+	10% { transform: scale(.9); }
+	50% { transform: scale(.9); }
+	70% { transform: scale(1); }
+}
+
+/* GLITCH ANIMATION */
+
+@keyframes glitch {
+  0%, 2%, 5%, 42%, 45%, 72%, 75%, 100% {opacity: 1; transform: scaleX(1) scaleY(1);}  
+  3% {opacity: .8; transform: scaleY(2);}
+  43% {opacity: .8; transform: scaleX(1.3);}
+  73% {opacity: 8; transform: rotate(5deg) scale(2);}
+}
+
+/* Some kind of... let's say... 'semi-responsiveness' */
+
+@media (max-width:960px) {
+  .container { transform: scale(.7); }
+}
+@media (max-width:840px) {
+  .container { transform: scale(.65); }
+}
+@media (max-width:800px) {
+  .container { transform: scale(.6); }
+}
+@media (max-width:780px) {
+  .container { transform: scale(.5); }
+}
+@media (max-width:600px) {
+  .container { transform: scale(.45); }
+  .slogan .fa { display: none; }
+}
+@media (max-width:480px) {
+  .container { transform: scale(.4); }
+  .slogan .fa { display: none; }
+}

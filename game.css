@@ -1,0 +1,12 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    }
+    
+canvas {
+    background: url("D:/BreakBuilder-test/Tiles/Breakout Tile Set Free/PNG/background.gif");
+    display: block;
+    }
+.color,#paddle,#paddle1,#bg,#heart,#slime,#super,#longer{ 
+    display:none;
+}
