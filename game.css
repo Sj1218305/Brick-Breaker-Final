@@ -4,7 +4,7 @@ body {
     }
     
 canvas {
-    background: url("D:/BreakBuilder-test/Tiles/Breakout Tile Set Free/PNG/background.gif");
+    background: url("/Tiles/Breakout Tile Set Free/PNG/background.gif");
     display: block;
     }
 .color,#paddle,#paddle1,#bg,#heart,#slime,#super,#longer{ 
