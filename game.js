@@ -68,9 +68,9 @@ const PupType = {
 var canv = document.getElementById("canvas");
 var ctx = canv.getContext("2d");
 
-var soundBrick = new Audio("D:/BreakBuilder-test/Tiles/Breakout Tile Set Free/Sounds/brickhit.mp3");
-var soundPaddle = new Audio("D:/BreakBuilder-test/Tiles/Breakout Tile Set Free/Sounds/sliderhit.mp3");
-var soundPowerup = new Audio("D:/BreakBuilder-test/Tiles/Breakout Tile Set Free/Sounds/youwon.mp3");
+var soundBrick = new Audio("/Tiles/Breakout Tile Set Free/Sounds/brickhit.mp3");
+var soundPaddle = new Audio("/Tiles/Breakout Tile Set Free/Sounds/sliderhit.mp3");
+var soundPowerup = new Audio("/Tiles/Breakout Tile Set Free/Sounds/youwon.mp3");
 var soundWall = soundPaddle;
 
 var ball, bricks = [], paddle, pups = [];
