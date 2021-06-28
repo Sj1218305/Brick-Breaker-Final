@@ -1,30 +1,29 @@
-const BALL_SPD = 0.5; // starting ball speed as a fraction of screen height per second
-const BALL_SPD_MAX = 2; // max ball speed as a multiple of starting speed
-const BALL_SPIN = 0.2; // ball deflection off the paddle (0 = no spin, 1 = high spin)
-const BRICK_COLS = 14; // number of brick columns
-const BRICK_GAP = 0.3; // brick gap as a fraction of wall width
-const BRICK_ROWS = 8; // starting number of brick rows
-const GAME_LIVES = 3; // starting number of game lives
-const KEY_SCORE = "breakout_highscore"; // save key for local storage of high score
-const MARGIN = 6; // number of empty rows above the bricks
-const MAX_LEVEL = 10; // maximum game level (+2 rows of bricks per level)
-const MIN_BOUNCE_ANGLE = 30; // minimum bounce angle from the horizontal in degrees
-const PADDLE_SIZE = 2.5; // paddle size as a multiple of wall thickness
-const PADDLE_SPD = 0.5; // fraction of screen width per second
-const PADDLE_W = 0.1; // paddle width as a fraction of screen width
-const PUP_BONUS = 50; // bonus points for collecting an extra powerup
-const PUP_CHANCE = 0.1; // probability of a powerup per brick hit (between 0 and 1)
-const PUP_SPD = 0.15; // powerup speed as a fraction of screen height per second
-const WALL = 0.02; // wall/ball size as a fraction of the shortest screen dimension
+const BALL_SPD = 0.5; 
+const BALL_SPD_MAX = 2; 
+const BALL_SPIN = 0.2; 
+const BRICK_COLS = 14; 
+const BRICK_GAP = 0.3; 
+const BRICK_ROWS = 8; 
+const GAME_LIVES = 3; 
+const KEY_SCORE = "breakout_highscore"; 
+const MARGIN = 6; 
+const MAX_LEVEL = 10; 
+const MIN_BOUNCE_ANGLE = 30; 
+const PADDLE_SIZE = 2.5; 
+const PADDLE_SPD = 0.5; 
+const PADDLE_W = 0.1; 
+const PUP_BONUS = 50;
+const PUP_CHANCE = 0.1;
+const PUP_SPD = 0.15; 
+const WALL = 0.02; 
 
-// colours
 const COLOR_BACKGROUND = "black";
 const COLOR_BALL = "#39FF14";
 const COLOR_PADDLE = "white";
 const COLOR_TEXT = "white";
 const COLOR_WALL = "grey";
 
-// text
+
 const TEXT_FONT = "Lucida Console";
 const TEXT_GAME_OVER = "GAME OVER";
 const TEXT_LEVEL = "Level";
@@ -33,7 +32,7 @@ const TEXT_SCORE = "Score";
 const TEXT_SCORE_HIGH = "BEST";
 const TEXT_WIN = "!!! YOU WIN !!!";
 
-// definitions
+
 const Direction = {
     LEFT: 0,
     RIGHT: 1,
@@ -81,12 +80,12 @@ var numBricks, textSize;
 var height, width, wall;
 setDimensions();
 
-// event listeners
+
 document.addEventListener("keydown", keyDown);
 document.addEventListener("keyup", keyUp);
 window.addEventListener("resize", setDimensions);
 
-// set up the game loop
+
 var timeDelta, timeLast;
 requestAnimationFrame(loop);
 
@@ -95,7 +94,7 @@ function loop(timeNow) {
         timeLast = timeNow;
     }
 
-    // calculate the time difference
+    
     timeDelta = (timeNow - timeLast) * 0.001; // seconds
     timeLast = timeNow;
 
@@ -107,7 +106,6 @@ function loop(timeNow) {
         updatePups(timeDelta);
     }
 
-    // draw
     drawBackground();
     drawWalls();
     drawPups();
@@ -116,19 +114,18 @@ function loop(timeNow) {
     drawText();
     drawBall();
 
-    // call the next loop
+    
     requestAnimationFrame(loop);
 }
 
-// update the x and y velocities of the ball
+
 function applyBallSpeed(angle) {
     ball.xv = ball.spd * Math.cos(angle);
     ball.yv = -ball.spd * Math.sin(angle);
 }
 
 function createBricks() {
-    
-    // row dimensions
+   
     let minY = wall;
     let maxY = ball.y - ball.h * 3.5;
     let totalSpaceY = maxY - minY;
@@ -138,12 +135,10 @@ function createBricks() {
     let h = rowH - gap;
     textSize = rowH * MARGIN * 0.5;
 
-    // column dimensions
     let totalSpaceX = width - wall * 2;
     let colW = (totalSpaceX - gap) / BRICK_COLS;
     let w = colW - gap;
 
-    // populate the bricks array
     bricks = [];
     let cols = BRICK_COLS;
     let rows = BRICK_ROWS + level * 2;
@@ -166,8 +161,6 @@ function createBricks() {
 
 function drawBackground() {
     ctx.drawImage(background,0,0,width,height)
-    // ctx.fillStyle = COLOR_BACKGROUND;
-    // ctx.fillRect(0, 0, width, height);
 }
 
 function drawBall() {
@@ -237,7 +230,6 @@ function drawPups() {
 function drawText() {
     ctx.fillStyle = COLOR_TEXT;
 
-    // dimensions
     let labelSize = textSize * 0.5;
     let margin = wall * 2;
     let maxWidth = width - margin * 2;
@@ -252,7 +244,6 @@ function drawText() {
     let yLabel = wall + labelSize;
     let yValue = yLabel + textSize * 0.9;
 
-    // labels
     ctx.font = labelSize + "px " + TEXT_FONT;
     ctx.textAlign = "left";
     ctx.fillText(TEXT_SCORE, x1, yLabel, maxWidth1);
@@ -261,8 +252,6 @@ function drawText() {
     ctx.fillText(TEXT_LEVEL, x3, yLabel, maxWidth3);
     ctx.textAlign = "right";
     ctx.fillText(TEXT_SCORE_HIGH, x4, yLabel, maxWidth4);
-
-    // values
     ctx.font = textSize + "px " + TEXT_FONT;
     ctx.textAlign = "left";
     ctx.fillText(score, x1, yValue, maxWidth1);
@@ -272,7 +261,6 @@ function drawText() {
     ctx.textAlign = "right";
     ctx.fillText(scoreHigh, x4, yValue, maxWidth4);
 
-    // game over
     if (gameOver) {
         let text = win ? TEXT_WIN : TEXT_GAME_OVER;
         ctx.font = textSize + "px " + TEXT_FONT;
@@ -294,18 +282,15 @@ function drawWalls() {
     ctx.stroke();
 }
 
-// red = 0, orange = 0.33, yellow = 0.67, green = 1
 function getBrickColor(rank, highestRank) {
     let fraction = rank / highestRank;
     let r, g, b = 0;
 
-    // red to orange to yellow (increase green)
     if (fraction <= 0.67) {
         r = 255;
         g = 255 * fraction / 0.67;
     }
 
-    // yellow to green (reduce red)
     else {
         r = 255 * (1 - fraction) / 0.33;
         g = 255;
@@ -317,16 +302,16 @@ function getBrickColor(rank, highestRank) {
 
 function keyDown(ev) {
     switch (ev.keyCode) {
-        case 32: // space bar (serve the ball)
+        case 32: 
             serve();
             if (gameOver) {
                 newGame();
             }
             break;
-        case 37: // left arrow (move paddle left)
+        case 37: 
             movePaddle(Direction.LEFT);
             break;
-        case 39: // right arrow (move paddle right)
+        case 39: 
             movePaddle(Direction.RIGHT);
             break;
     }
@@ -334,8 +319,8 @@ function keyDown(ev) {
 
 function keyUp(ev) {
     switch (ev.keyCode) {
-        case 37: // left arrow (stop moving)
-        case 39: // right arrow (stop moving)
+        case 37: 
+        case 39: 
             movePaddle(Direction.STOP);
             break;
     }
@@ -370,7 +355,6 @@ function newGame() {
     score = 0;
     win = false;
 
-    // get high score from local storage
     let scoreStr = localStorage.getItem(KEY_SCORE);
     if (scoreStr == null) {
         scoreHigh = 0;
@@ -378,7 +362,6 @@ function newGame() {
         scoreHigh = parseInt(scoreStr);
     }
     
-    // start a new level
     newLevel();
 }
 
@@ -389,7 +372,7 @@ function newLevel() {
 }
 
 function level2() {
-        // row dimensions
+        
         let minY = wall;
         let maxY = ball.y - ball.h * 3.5;
         let totalSpaceY = maxY - minY;
@@ -399,12 +382,10 @@ function level2() {
         let h = rowH - gap;
         textSize = rowH * MARGIN * 0.5;
     
-        // column dimensions
         let totalSpaceX = width - wall * 2;
         let colW = (totalSpaceX - gap) / BRICK_COLS;
         let w = colW - gap;
     
-        // populate the bricks array
         bricks = [];
         let cols = BRICK_COLS;
         let rows = BRICK_ROWS + level * 2;
@@ -447,12 +428,10 @@ function outOfBounds() {
 
 function serve() {
 
-    // ball already in motion
     if (ball.yv != 0) {
         return false;
     }
 
-    // random angle (not less than min bounce angle)
     let minBounceAngle = MIN_BOUNCE_ANGLE / 180 * Math.PI; // radians
     let range = Math.PI - minBounceAngle * 2;
     let angle = Math.random() * range + minBounceAngle;
@@ -516,7 +495,6 @@ function updateBall(delta) {
         spinBall();
     }
 
-    // bounce off the paddle
     if (ball.y > paddle.y - paddle.h * 0.5 - ball.h * 0.5
         && ball.y < paddle.y + paddle.h * 0.5
         && ball.x > paddle.x - paddle.w * 0.5 - ball.w * 0.5
@@ -533,7 +511,6 @@ function updateBall(delta) {
         soundPaddle.play();
     }
 
-    // handle out of bounds
     if (ball.y > height) {
         outOfBounds();
     }
@@ -541,21 +518,18 @@ function updateBall(delta) {
 
 function updateBricks(delta) {
 
-    // check for ball collisions
     OUTER: for (let i = 0; i < bricks.length; i++) {
         for (let j = 0; j < BRICK_COLS; j++) {
             if (bricks[i][j] != null && bricks[i][j].intersect(ball)) {
                 updateScore(bricks[i][j].score);
                 ball.setSpeed(bricks[i][j].spdMult);
 
-                // set ball to the edge of the brick
-                if (ball.yv < 0) { // upwards
+                if (ball.yv < 0) { 
                     ball.y = bricks[i][j].bot + ball.h * 0.5;
-                } else { // downwards
+                } else {
                     ball.y = bricks[i][j].top - ball.h * 0.5;
                 }
 
-                // create a powerup
                 if (Math.random() <= PUP_CHANCE) {
                     let px = bricks[i][j].left + bricks[i][j].w / 2;
                     let py = bricks[i][j].top + bricks[i][j].h / 2;
@@ -565,7 +539,6 @@ function updateBricks(delta) {
                     pups.push(new PowerUp(px, py, pSize, PupType[pKey]));
                 }
 
-                // bounce the ball (if not a super ball) and destroy the brick
                 if (!pupSuper) {
                     ball.yv = -ball.yv;
                 }
@@ -578,7 +551,6 @@ function updateBricks(delta) {
         }
     }
 
-    // next level
     if (numBricks == 0) {
         if (level < MAX_LEVEL) {
             level++;
@@ -596,19 +568,16 @@ function updatePaddle(delta) {
     let lastPaddleX = paddle.x;
     paddle.x += paddle.xv * delta;
 
-    // stop paddle at walls
     if (paddle.x < wall + paddle.w * 0.5) {
         paddle.x = wall + paddle.w * 0.5;
     } else if (paddle.x > width - wall - paddle.w * 0.5) {
         paddle.x = width - wall - paddle.w * 0.5;
     }
 
-    // move the stationary ball with the paddle
     if (ball.yv == 0) {
         ball.x += paddle.x - lastPaddleX;
     }
 
-    // collect powerups
     for (let i = pups.length - 1; i >= 0; i--) {
         if (
             pups[i].x + pups[i].w * 0.5 > paddle.x - paddle.w * 0.5
@@ -618,7 +587,6 @@ function updatePaddle(delta) {
         ) {
             switch(pups[i].type) {
                 case PupType.paddleSize:
-                    // double the width of the paddle
                     if (pupExtension) {
                         score += PUP_BONUS;
                     } else {
@@ -627,7 +595,6 @@ function updatePaddle(delta) {
                     }
                     break;
                 case PupType.life:
-                    // add a life
                     lives++;
                     break;
                 case PupType.stickyPaddle:
